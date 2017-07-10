@@ -11,7 +11,9 @@ Javascript build scripts.
 	{
 		"scripts": {
 			"build": "./node_modules/jbs-fe/bin.js build",
-			"dev": "./node_modules/jbs-fe/bin.js dev"
+			"dev": "./node_modules/jbs-fe/bin.js dev",
+			"test": "./node_modules/jbs-fe/bin.js test",
+			"test:watch": "./node_modules/jbs-fe/bin.js test --single-run"
 		},
 		"babel": {
 			"presets": ["./node_modules/jbs-fe/configs/babel-preset-jbs-fe.js"]

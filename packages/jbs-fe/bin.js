@@ -21,6 +21,12 @@ try {
         flags: argv,
       })
       break
+    case 'test':
+      require('./scripts/karma.js')({
+        commands: argv._,
+        flags: argv,
+      })
+      break
     default:
       break
   }
