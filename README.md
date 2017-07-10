@@ -12,8 +12,8 @@ Javascript build scripts.
 		"scripts": {
 			"build": "./node_modules/jbs-fe/bin.js build",
 			"dev": "./node_modules/jbs-fe/bin.js dev",
-			"test": "./node_modules/jbs-fe/bin.js test",
-			"test:watch": "./node_modules/jbs-fe/bin.js test --single-run"
+			"test": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test",
+			"test:watch": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test --single-run"
 		},
 		"babel": {
 			"presets": ["./node_modules/jbs-fe/configs/babel-preset-jbs-fe.js"]
@@ -69,6 +69,9 @@ To build a frontend package, use `build:package` command instead of build. It ta
 }
 ```
 
+## Test
+
+Tests all `*.spec.js` files.
 
 ## Node
 
