@@ -10,7 +10,7 @@ Javascript build scripts.
 	```json
 	{
 		"scripts": {
-			"build": "./node_modules/jbs-fe/bin.js build",
+			"build": "NODE_ENV=prod ./node_modules/jbs-fe/bin.js build",
 			"dev": "./node_modules/jbs-fe/bin.js dev",
 			"test": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test",
 			"test:watch": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test --single-run"
