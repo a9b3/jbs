@@ -15,6 +15,12 @@ try {
         flags: argv,
       })
       break
+    case 'build:package':
+      require('./scripts/build-package.js')({
+        commands: argv._,
+        flags: argv,
+      })
+      break
     default:
       break
   }

@@ -50,3 +50,16 @@ To change you just need to supply 3 flags.
 ## React
 
 To support react, simply add `BABEL_REACT=true` when running any of the commands.
+
+## Package
+
+```json
+{
+	"scripts": {
+		"build": "./node_modules/jbs-fe/bin.js build:package --input src --output build"
+	},
+	"babel": {
+		"presets": ["./node_modules/jbs-fe/configs/babel-preset-jbs-fe.js"]
+	}
+}
+```
