@@ -13,3 +13,28 @@
 		}
 	}
 	```
+	
+	
+## File Structure
+
+You can override the file structure with the following flags supplied to build command.
+
+```js
+/*
+ * This file takes these arguments via the appPaths module.
+ *
+ * appPaths.appIndex
+ * appPaths.outputPath
+ * appPaths.htmlIndex
+ * appPaths.resolveNodeModules
+ * appPaths.faviconPath
+ */
+```
+
+Default file structure.
+
+```
+package.json
+./src/index.html
+./src/app/index.js
+```
