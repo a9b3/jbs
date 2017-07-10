@@ -6,12 +6,8 @@ module.exports = function build({
   flags,
 }) {
   if (!flags.input || !flags.output) {
-    console.log(flags)
     throw new Error(`require both --input and --output to be specified`)
   }
 
-  babelBuild({
-    input: flags.input,
-    output: flags.output,
-  })
+  babelBuild(flags)
 }

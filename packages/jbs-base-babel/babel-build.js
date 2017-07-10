@@ -5,7 +5,9 @@ const { exec } = require('child_process')
 module.exports = function babelBuild({
   input,
   output,
-}) {
+  esInputFile,
+  esOutputFile,
+} = {}) {
   const isDir = fs.lstatSync(input).isDirectory()
   const babelCliPath = require.resolve('babel-cli/bin/babel')
 
@@ -21,5 +23,21 @@ module.exports = function babelBuild({
     }
 
     console.log(stdout)
+
+    if (esInputFile && esOutputFile) {
+      process.env.BABEL_MODULE = false
+
+      const esInputFilePath = path.resolve(process.cwd(), esInputFile)
+      const esOutputFilePath = path.resolve(process.cwd(), esOutputFile)
+
+      let cmd  = `${babelCliPath} ${esInputFilePath} -o ${esOutputFilePath}`
+      exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+          return console.error(err)
+        }
+
+        console.log(stdout)
+      })
+    }
   })
 }
