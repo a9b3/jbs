@@ -38,3 +38,15 @@ package.json
 ./src/index.html
 ./src/app/index.js
 ```
+
+To change you just need to supply 3 flags.
+
+```
+--app-index=./src/app/index.js
+--html-index=./src/index.html
+--context=./src
+```
+
+## React
+
+To support react, simply add `BABEL_REACT=true` when running any of the commands.
