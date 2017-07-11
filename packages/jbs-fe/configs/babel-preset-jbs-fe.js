@@ -1,11 +1,9 @@
 const BABEL_REACT = process.env.BABEL_REACT
+process.env.BABEL_MODULE = false
 
 module.exports = {
   presets: [
     require.resolve('jbs-base-babel'),
-    [require.resolve('babel-preset-es2015'), {
-      modules: false,
-    }],
     BABEL_REACT && require.resolve('babel-preset-react'),
   ].filter(a => a),
   plugins: [
