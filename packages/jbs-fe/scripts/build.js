@@ -5,6 +5,8 @@ module.exports = function build({
   commands,
   flags,
 }) {
+  process.env.BABEL_MODULE = false
+
   const statsArgs = {
     chunks: false,
     colors: true,

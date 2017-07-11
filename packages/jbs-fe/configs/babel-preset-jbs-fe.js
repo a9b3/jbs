@@ -1,5 +1,4 @@
 const BABEL_REACT = process.env.BABEL_REACT
-process.env.BABEL_MODULE = false
 
 module.exports = {
   presets: [
