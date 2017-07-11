@@ -2,6 +2,7 @@
 const isCI = process.env.CONTINUOUS_INTEGRATION
 const webpackConfig = require('./webpack.config.js')
 const appPaths = require('../app-paths.js')
+const path = require('path')
 
 module.exports = function getKarmaConf(config) {
   const patternPath = path.resolve(appPaths.projectRoot) + '/!(node_modules|build|lib)/**/*.spec.js?(x)'
