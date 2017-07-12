@@ -1,8 +1,14 @@
 # JBS
 
-Javascript build scripts.
+Javascript build scripts. Exposes two packages.
 
-## Frontend
+- `jbs-fe`
+- `jbs-node`
+
+
+## jbs-fe (Frontend apps/packages)
+
+### Setup
 
 1. `yarn add jbs-fe --dev`
 2. Add fields to package.json.
@@ -11,7 +17,7 @@ Javascript build scripts.
 	{
 		"scripts": {
 			"build": "NODE_ENV=prod ./node_modules/jbs-fe/bin.js build",
-			"dev": "./node_modules/jbs-fe/bin.js dev",
+			"start": "./node_modules/jbs-fe/bin.js dev",
 			"test": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test",
 			"test:watch": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test --single-run"
 		},
@@ -22,7 +28,7 @@ Javascript build scripts.
 	```
 
 
-### File Structure
+### Assumed File Structure
 
 You can override the file structure with the following flags supplied to build command.
 
@@ -50,13 +56,13 @@ To change you just need to supply 3 flags.
 --context ./src
 ```
 
-### React
+### Developing a React App?
 
 To support react, simply add `BABEL_REACT=true` when running any of the commands.
 
-### Package
+### Developing a Frontend Package?
 
-To build a frontend package, use `build:package` command instead of build. It takes the same arguments as jbs-node build. (See Below)
+To build a frontend package, use `build:package` command instead of `build`. It takes the same arguments as jbs-node build. (See Below)
 
 ```json
 {
@@ -69,11 +75,9 @@ To build a frontend package, use `build:package` command instead of build. It ta
 }
 ```
 
-## Test
+## jbs-node (Node apps/packages)
 
-Tests all `*.spec.js` files.
-
-## Node
+### Setup
 
 1. `yarn add jbs-node --dev`
 2. Add fields to package.json.
@@ -89,9 +93,16 @@ Tests all `*.spec.js` files.
 	}
 	```
 
-### built file with import/export
+### Want to expose module with import/export syntax?
 
-Optional if you want to include a built version that still has import/export syntax supply the following flags to the build command.
+You just need to include the two additional flags to the `build` command.
+
+```
+--es-input-file 
+--es-output-file
+```
+
+*eg.*
 
 ```
 ./node_modules/jbs-node/bin.js build --input src --output build --es-input-file src/index.js --es-output-file build/index.es.js
@@ -104,3 +115,8 @@ Now you can add this to your package.json.
 	"module": "./build/index.es.js"
 }
 ```
+
+
+## Test
+
+Tests all `*.spec.js` files.
