@@ -12,6 +12,10 @@ module.exports = function webpackDev() {
   wpConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   const server = new WebpackDevServer(webpack(wpConfig), {
+    // TODO pass this in via flag
+    // https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a
+    // https://github.com/webpack/webpack-dev-server/issues/882
+    disableHostCheck: true,
     contentBase: appPaths.context,
     hot: true,
     inline: true,
