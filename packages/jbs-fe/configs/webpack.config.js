@@ -136,6 +136,12 @@ const webpackConfig = {
   },
   // https://github.com/webpack/docs/wiki/list-of-plugins
   plugins: [
+    process.env.BABEL_REACT && new webpack.ProvidePlugin({
+      '_': 'lodash',
+      'React': 'react',
+      'cssModule': 'react-css-modules',
+      'Promise': 'bluebird',
+    }),
     new webpack.DefinePlugin({
       'process.env': Object.keys(process.env).reduce((env, key) => {
         env[key] = JSON.stringify(process.env[key])
