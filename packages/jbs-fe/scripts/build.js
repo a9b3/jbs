@@ -1,3 +1,6 @@
+process.env.BABEL_MODULE = false
+process.env.NODE_ENV = 'production'
+
 const webpack  = require('webpack')
 const wpConfig = require('../configs/webpack.config.js')
 
@@ -5,9 +8,6 @@ module.exports = function build({
   commands,
   flags,
 }) {
-  process.env.BABEL_MODULE = false
-  process.env.NODE_ENV = 'production'
-
   const statsArgs = {
     chunks: false,
     colors: true,
