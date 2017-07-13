@@ -8,13 +8,14 @@
  * appPaths.faviconPath
  */
 
-const path                  = require('path')
-const webpack               = require('webpack')
-const HtmlWebpackPlugin     = require('html-webpack-plugin')
-const ExtractText           = require('extract-text-webpack-plugin')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-const autoprefixer          = require('autoprefixer')
-const appPaths              = require('../app-paths.js')
+const path                    = require('path')
+const webpack                 = require('webpack')
+const HtmlWebpackPlugin       = require('html-webpack-plugin')
+const ExtractText             = require('extract-text-webpack-plugin')
+const FaviconsWebpackPlugin   = require('favicons-webpack-plugin')
+const autoprefixer            = require('autoprefixer')
+const appPaths                = require('../app-paths.js')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 // dev, prod, test
 const ENV = process.env.NODE_ENV || 'dev'
@@ -178,6 +179,12 @@ const webpackConfig = {
         warnings: false,
       },
     }),
+    ENV === 'prod' && new SWPrecacheWebpackPlugin({
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      minify: true,
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
     // https://github.com/jantimon/favicons-webpack-plugin
     appPaths.faviconPath && new FaviconsWebpackPlugin({
       logo: appPaths.faviconPath,
@@ -185,7 +192,7 @@ const webpackConfig = {
         favicons: true,
       },
     }),
-  ].filter(a => a),
+  ].filter(Boolean),
 }
 
 function genStyleLoaders({ css =  false } = {}) {
