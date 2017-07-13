@@ -6,7 +6,7 @@ module.exports = function build({
   flags,
 }) {
   process.env.BABEL_MODULE = false
-  process.env.NODE_ENV = 'prod'
+  process.env.NODE_ENV = 'production'
 
   const statsArgs = {
     chunks: false,

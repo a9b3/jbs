@@ -17,12 +17,12 @@ const autoprefixer            = require('autoprefixer')
 const appPaths                = require('../app-paths.js')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
-// dev, prod, test
+// dev, production, test
 const ENV = process.env.NODE_ENV || 'dev'
 
 const webpackConfig = {
   // https://webpack.js.org/configuration/devtool/
-  devtool: ENV !== 'prod' ? 'cheap-module-source-map' : false,
+  devtool: ENV !== 'production' ? 'cheap-module-source-map' : false,
   entry: {
     // generally just need one entry file, but if you want another tag for
     // something like google analytics script you can add to this array
@@ -167,19 +167,19 @@ const webpackConfig = {
     }),
     ENV === 'dev' && new webpack.NamedModulesPlugin(),
     ENV === 'dev' && new webpack.NoEmitOnErrorsPlugin(),
-    ENV === 'prod' && new ExtractText({
+    ENV === 'production' && new ExtractText({
       filename: '[name].[hash].bundle.css',
     }),
-    ENV === 'prod' && new webpack.optimize.MinChunkSizePlugin({
+    ENV === 'production' && new webpack.optimize.MinChunkSizePlugin({
       minChunkSize: 51200,
     }),
-    ENV === 'prod' && new webpack.optimize.UglifyJsPlugin({
+    ENV === 'production' && new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       compressor: {
         warnings: false,
       },
     }),
-    ENV === 'prod' && new SWPrecacheWebpackPlugin({
+    ENV === 'production' && new SWPrecacheWebpackPlugin({
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'service-worker.js',
       minify: true,
@@ -196,7 +196,7 @@ const webpackConfig = {
 }
 
 function genStyleLoaders({ css =  false } = {}) {
-  const sourceMap = ENV !== 'prod'
+  const sourceMap = ENV !== 'production'
   const styleLoader = {
     loader: require.resolve('style-loader'),
     options: {
@@ -229,7 +229,7 @@ function genStyleLoaders({ css =  false } = {}) {
     },
   }
 
-  return ENV === 'prod'
+  return ENV === 'production'
     ?
       ExtractText.extract({
         fallback: require.resolve('style-loader'),

@@ -16,7 +16,7 @@ Javascript build scripts. Exposes two packages.
 	```json
 	{
 		"scripts": {
-			"build": "NODE_ENV=prod ./node_modules/jbs-fe/bin.js build",
+			"build": "NODE_ENV=production ./node_modules/jbs-fe/bin.js build",
 			"start": "./node_modules/jbs-fe/bin.js dev",
 			"test": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test",
 			"test:watch": "NODE_ENV=test ./node_modules/jbs-fe/bin.js test --single-run"
