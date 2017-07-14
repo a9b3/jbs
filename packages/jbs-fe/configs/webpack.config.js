@@ -187,7 +187,7 @@ const webpackConfig = {
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
     // https://github.com/jantimon/favicons-webpack-plugin
-    appPaths.faviconPath && new FaviconsWebpackPlugin({
+    ENV === 'production' && appPaths.faviconPath && new FaviconsWebpackPlugin({
       logo: appPaths.faviconPath,
       icons: {
         favicons: true,
