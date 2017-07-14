@@ -143,6 +143,7 @@ const webpackConfig = {
       'cssModule': 'react-css-modules',
       'Promise': 'bluebird',
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       'process.env': Object.keys(process.env).reduce((env, key) => {
         env[key] = JSON.stringify(process.env[key])
