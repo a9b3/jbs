@@ -5,7 +5,7 @@ const appPaths         = require('../app-paths.js')
 const wpConfig         = require('../configs/webpack.config.js')
 
 module.exports = function webpackDev() {
-  const port = process.env.PORT || 8080
+  const port = process.env.PORT || 5000
 
   wpConfig.entry.app.unshift('webpack-dev-server/client?')
   wpConfig.entry.app.unshift('webpack/hot/dev-server')
