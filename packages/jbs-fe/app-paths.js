@@ -19,7 +19,7 @@ const flagArgs = {
 }
 
 const appPaths = {
-  appIndex           : relative(flagArgs.appIndex || './src/app/index.js'),
+  appIndex           : relative(flagArgs.appIndex || './src/index.js'),
   context            : relative(flagArgs.context || './src'),
   faviconPath        : flagArgs.faviconPath && relative(flagArgs.faviconPath),
   htmlIndex          : relative(flagArgs.htmlIndex || './src/index.html'),
