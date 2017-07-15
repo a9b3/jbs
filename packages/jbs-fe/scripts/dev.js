@@ -16,13 +16,18 @@ module.exports = function webpackDev() {
     // https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a
     // https://github.com/webpack/webpack-dev-server/issues/882
     disableHostCheck: true,
+    compress: true,
     contentBase: appPaths.context,
+    watchContentBase: true,
     hot: true,
     inline: true,
     historyApiFallback: true,
-    clientLogLevel: 'error',
+    clientLogLevel: 'none',
     stats: {
       colors: true,
+    },
+    watchOptions: {
+      ignored: /node_modules/,
     },
   })
 
