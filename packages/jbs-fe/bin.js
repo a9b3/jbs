@@ -4,24 +4,28 @@ const argv = require('yargs').argv
 try {
   switch(argv._[0]) {
     case 'build':
+      process.env.NODE_ENV = 'production'
       require('./scripts/build.js')({
         commands: argv._,
         flags: argv,
       })
       break
     case 'dev':
+      process.env.NODE_ENV = 'dev'
       require('./scripts/dev.js')({
         commands: argv._,
         flags: argv,
       })
       break
     case 'build:package':
+      process.env.NODE_ENV = 'production'
       require('./scripts/build-package.js')({
         commands: argv._,
         flags: argv,
       })
       break
     case 'test':
+      process.env.NODE_ENV = 'test'
       require('./scripts/karma.js')({
         commands: argv._,
         flags: argv,

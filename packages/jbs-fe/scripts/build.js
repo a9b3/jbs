@@ -1,5 +1,4 @@
 process.env.BABEL_MODULE = false
-process.env.NODE_ENV = 'production'
 
 const webpack  = require('webpack')
 const wpConfig = require('../configs/webpack.config.js')

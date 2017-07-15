@@ -17,12 +17,11 @@ const autoprefixer            = require('autoprefixer')
 const appPaths                = require('../app-paths.js')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
-// dev, production, test
-const ENV = process.env.NODE_ENV || 'dev'
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 
 const webpackConfig = {
   // https://webpack.js.org/configuration/devtool/
-  devtool: ENV !== 'production' ? 'cheap-module-source-map' : false,
+  devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-source-map' : false,
   entry: {
     // generally just need one entry file, but if you want another tag for
     // something like google analytics script you can add to this array
@@ -160,7 +159,7 @@ const webpackConfig = {
         template: appPaths.htmlIndex,
       },
       // production configs
-      ENV === 'production' && {
+      process.env.NODE_ENV === 'production' && {
         minify: {
           removeComments: true,
           collapseWhitespace: true,
@@ -184,30 +183,30 @@ const webpackConfig = {
       // https://webpack.js.org/guides/migrating/#debug
       // image-webpack-loader uses this to bypass optimization in development
       // mode (webpack dev server)
-      debug: ENV === 'dev',
+      debug: process.env.NODE_ENV === 'dev',
     }),
-    ENV === 'dev' && new webpack.NamedModulesPlugin(),
-    ENV === 'dev' && new webpack.NoEmitOnErrorsPlugin(),
-    ENV === 'production' && new ExtractText({
+    process.env.NODE_ENV === 'dev' && new webpack.NamedModulesPlugin(),
+    process.env.NODE_ENV === 'dev' && new webpack.NoEmitOnErrorsPlugin(),
+    process.env.NODE_ENV === 'production' && new ExtractText({
       filename: '[name].[hash].bundle.css',
     }),
-    ENV === 'production' && new webpack.optimize.MinChunkSizePlugin({
+    process.env.NODE_ENV === 'production' && new webpack.optimize.MinChunkSizePlugin({
       minChunkSize: 51200,
     }),
-    ENV === 'production' && new webpack.optimize.UglifyJsPlugin({
+    process.env.NODE_ENV === 'production' && new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       compressor: {
         warnings: false,
       },
     }),
-    ENV === 'production' && new SWPrecacheWebpackPlugin({
+    process.env.NODE_ENV === 'production' && new SWPrecacheWebpackPlugin({
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'service-worker.js',
       minify: true,
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
     // https://github.com/jantimon/favicons-webpack-plugin
-    ENV === 'production' && appPaths.faviconPath && new FaviconsWebpackPlugin({
+    process.env.NODE_ENV === 'production' && appPaths.faviconPath && new FaviconsWebpackPlugin({
       logo: appPaths.faviconPath,
       icons: {
         favicons: true,
@@ -217,7 +216,7 @@ const webpackConfig = {
 }
 
 function genStyleLoaders({ css =  false } = {}) {
-  const sourceMap = ENV !== 'production'
+  const sourceMap = process.env.NODE_ENV !== 'production'
   const styleLoader = {
     loader: require.resolve('style-loader'),
     options: {
@@ -250,7 +249,7 @@ function genStyleLoaders({ css =  false } = {}) {
     },
   }
 
-  return ENV === 'production'
+  return process.env.NODE_ENV === 'production'
     ?
       ExtractText.extract({
         fallback: require.resolve('style-loader'),
@@ -269,7 +268,7 @@ function genStyleLoaders({ css =  false } = {}) {
       ].filter(a => a)
 }
 
-if (ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
   delete webpackConfig.entry
   delete webpackConfig.output
 }
