@@ -152,9 +152,29 @@ const webpackConfig = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'dev'),
       }),
     }),
-    new HtmlWebpackPlugin({
-      template: appPaths.htmlIndex,
-    }),
+    new HtmlWebpackPlugin(Object.assign(
+      {},
+      // default configs
+      {
+        inject: true,
+        template: appPaths.htmlIndex,
+      },
+      // production configs
+      ENV === 'production' && {
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true,
+        },
+      }
+    )),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       children: true,
