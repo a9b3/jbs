@@ -44,13 +44,6 @@ const webpackConfig = {
     // https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L91
     .concat((process.env.NODE_PATH || '').split(path.delimiter).filter(Boolean)),
   },
-  // files in babel-core imports Node modules
-  node: {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
   module: {
     strictExportPresence: true,
     rules: [
