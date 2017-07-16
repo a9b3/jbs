@@ -50,7 +50,6 @@ const webpackConfig = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    module: 'empty',
   },
   module: {
     strictExportPresence: true,
