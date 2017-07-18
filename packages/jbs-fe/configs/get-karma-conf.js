@@ -1,5 +1,4 @@
 // set env var in ci configs
-const isCI = process.env.CONTINUOUS_INTEGRATION
 const webpackConfig = require('./webpack.config.js')
 const appPaths = require('../app-paths.js')
 const path = require('path')
@@ -13,7 +12,7 @@ module.exports = function getKarmaConf(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     browsers: [
-      isCI ? 'PhantomJS' : 'Chrome',
+      'Chrome',
     ],
     singleRun: false,
     frameworks: [
