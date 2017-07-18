@@ -9,5 +9,6 @@ module.exports = function runKarmaTest({
     singleRun: flags.singleRun,
   }, (exitCode) => {
     // done do nothing
+    process.exit(exitCode)
   }).start()
 }
