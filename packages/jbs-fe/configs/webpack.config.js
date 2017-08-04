@@ -17,11 +17,12 @@ const autoprefixer            = require('autoprefixer')
 const appPaths                = require('../app-paths.js')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+process.env.APP_ENV = process.env.APP_ENV || 'development'
 
 const webpackConfig = {
   // https://webpack.js.org/configuration/devtool/
-  devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-source-map' : false,
+  devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : false,
   entry: {
     // generally just need one entry file, but if you want another tag for
     // something like google analytics script you can add to this array
@@ -148,7 +149,7 @@ const webpackConfig = {
         env[key] = JSON.stringify(process.env[key])
         return env
       }, {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'dev'),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
       }),
     }),
     new HtmlWebpackPlugin(Object.assign(
@@ -183,10 +184,10 @@ const webpackConfig = {
       // https://webpack.js.org/guides/migrating/#debug
       // image-webpack-loader uses this to bypass optimization in development
       // mode (webpack dev server)
-      debug: process.env.NODE_ENV === 'dev',
+      debug: process.env.NODE_ENV === 'development',
     }),
-    process.env.NODE_ENV === 'dev' && new webpack.NamedModulesPlugin(),
-    process.env.NODE_ENV === 'dev' && new webpack.NoEmitOnErrorsPlugin(),
+    process.env.NODE_ENV === 'development' && new webpack.NamedModulesPlugin(),
+    process.env.NODE_ENV === 'development' && new webpack.NoEmitOnErrorsPlugin(),
     process.env.NODE_ENV === 'production' && new ExtractText({
       filename: '[name].[hash].bundle.css',
     }),
@@ -277,7 +278,7 @@ function genStyleLoaders({ css =  false } = {}) {
       ].filter(a => a)
 }
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.APP_ENV === 'test') {
   delete webpackConfig.entry
   delete webpackConfig.output
 }

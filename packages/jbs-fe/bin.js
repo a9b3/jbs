@@ -11,7 +11,7 @@ try {
       })
       break
     case 'dev':
-      process.env.NODE_ENV = 'dev'
+      process.env.NODE_ENV = 'development'
       require('./scripts/dev.js')({
         commands: argv._,
         flags: argv,
@@ -25,7 +25,7 @@ try {
       })
       break
     case 'test':
-      process.env.NODE_ENV = 'test'
+      process.env.APP_ENV = 'test'
       require('./scripts/karma.js')({
         commands: argv._,
         flags: argv,
