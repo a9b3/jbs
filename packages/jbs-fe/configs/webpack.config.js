@@ -58,7 +58,7 @@ const webpackConfig = {
           /\.html$/,
           /\.json$/,
           /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-          /\.(png|jpe?g|gif|svg|ico)$/,
+          /\.(png|jpe?g|gif|svg|ico)$/i,
         ],
         loader: require.resolve('file-loader'),
       },
@@ -79,7 +79,7 @@ const webpackConfig = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        test: /\.(png|jpe?g|gif|ico)$/i,
         use: [
           {
             loader: require.resolve('url-loader'),
@@ -107,6 +107,17 @@ const webpackConfig = {
             },
           },
         ].filter(a => a),
+      },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: require.resolve('svgo-loader'),
+          },
+          {
+            loader: require.resolve('svg-sprite-loader'),
+          },
+        ],
       },
       {
         test: /\.jsx?$/,
@@ -226,7 +237,8 @@ const webpackConfig = {
 }
 
 function genStyleLoaders({ css =  false } = {}) {
-  const sourceMap = process.env.NODE_ENV !== 'production'
+  const isProd = process.env.NODE_ENV === 'production'
+  const sourceMap = !isProd
   const styleLoader = {
     loader: require.resolve('style-loader'),
     options: {
@@ -238,7 +250,7 @@ function genStyleLoaders({ css =  false } = {}) {
     options: {
       modules: true,
       importLoaders: '1',
-      localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+      localIdentName: `[path]___[name]__[local]${isProd ? '___[hash:base64:5]' : '' }`,
       sourceMap,
     },
   }
