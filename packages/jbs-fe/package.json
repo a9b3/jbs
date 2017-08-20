@@ -33,6 +33,8 @@
     "sass-loader": "^6.0.5",
     "sinon": "2.0.0-pre.3",
     "style-loader": "^0.18.2",
+    "svg-sprite-loader": "^3.2.4",
+    "svgo-loader": "^1.2.1",
     "sw-precache-webpack-plugin": "^0.11.4",
     "ts-loader": "^2.2.1",
     "typescript": "^2.4.1",
