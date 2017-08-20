@@ -112,9 +112,6 @@ const webpackConfig = {
         test: /\.svg$/i,
         use: [
           {
-            loader: require.resolve('svgo-loader'),
-          },
-          {
             loader: require.resolve('svg-sprite-loader'),
           },
         ],
