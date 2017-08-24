@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const argv = require('yargs').argv
+require('dotenv').config()
 
 try {
   switch(argv._[0]) {
