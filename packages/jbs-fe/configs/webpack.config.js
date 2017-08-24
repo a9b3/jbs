@@ -113,6 +113,9 @@ const webpackConfig = {
         use: [
           {
             loader: require.resolve('svg-sprite-loader'),
+            options: {
+              extract: false,
+            },
           },
         ],
       },
