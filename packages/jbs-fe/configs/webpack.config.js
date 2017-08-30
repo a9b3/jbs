@@ -14,8 +14,10 @@ const HtmlWebpackPlugin       = require('html-webpack-plugin')
 const ExtractText             = require('extract-text-webpack-plugin')
 const FaviconsWebpackPlugin   = require('favicons-webpack-plugin')
 const autoprefixer            = require('autoprefixer')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const StatsPlugin             = require('stats-webpack-plugin')
+
 const appPaths                = require('../app-paths.js')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 process.env.APP_ENV = process.env.APP_ENV || 'development'
@@ -232,6 +234,9 @@ const webpackConfig = {
         yandex: false,
         windows: false,
       },
+    }),
+    process.env.NODE_ENV === 'production' && new StatsPlugin('stats.json', {
+      chunkModules: true,
     }),
   ].filter(Boolean),
 }

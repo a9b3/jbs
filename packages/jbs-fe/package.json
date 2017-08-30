@@ -33,6 +33,7 @@
     "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.5",
     "sinon": "^3.2.1",
+    "stats-webpack-plugin": "^0.6.1",
     "style-loader": "^0.18.2",
     "svg-sprite-loader": "^3.2.4",
     "sw-precache-webpack-plugin": "^0.11.4",
