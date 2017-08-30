@@ -16,6 +16,7 @@ const FaviconsWebpackPlugin   = require('favicons-webpack-plugin')
 const autoprefixer            = require('autoprefixer')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const StatsPlugin             = require('stats-webpack-plugin')
+const CompressionPlugin       = require('compression-webpack-plugin')
 
 const appPaths                = require('../app-paths.js')
 
@@ -237,6 +238,13 @@ const webpackConfig = {
     }),
     process.env.NODE_ENV === 'production' && new StatsPlugin('stats.json', {
       chunkModules: true,
+    }),
+    process.env.NODE_ENV === 'production' && new CompressionPlugin({
+      asset: '[path]',
+      algorithm: 'gzip',
+      test: /\.(js|css|html)$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ].filter(Boolean),
 }
