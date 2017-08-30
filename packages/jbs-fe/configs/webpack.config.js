@@ -240,7 +240,7 @@ const webpackConfig = {
       chunkModules: true,
     }),
     process.env.NODE_ENV === 'production' && new CompressionPlugin({
-      asset: '[path]',
+      asset: '[path].gz',
       algorithm: 'gzip',
       test: /\.(js|css|html)$/,
       threshold: 10240,
