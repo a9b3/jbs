@@ -34,7 +34,7 @@ const webpackConfig = {
   output: {
     path: appPaths.outputPath,
     publicPath: '/',
-    filename: `[name]${process.env.NODE_ENV === 'production' ? '.[hash]'}.bundled.js`,
+    filename: `[name]${process.env.NODE_ENV === 'production' ? '.[hash]' : ''}.bundled.js`,
     // Point sourcemap entries to original disk location
     // https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L80
     devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
