@@ -61,7 +61,7 @@ const webpackConfig = {
           /\.html$/,
           /\.json$/,
           /\.(woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-          /\.(png|jpe?g|gif|svg|ico)$/i,
+          /\.(png|jpe?g|gif|ico)$/i,
         ],
         loader: require.resolve('file-loader'),
       },
@@ -110,17 +110,6 @@ const webpackConfig = {
             },
           },
         ].filter(a => a),
-      },
-      {
-        test: /\.svg$/i,
-        use: [
-          {
-            loader: require.resolve('svg-sprite-loader'),
-            options: {
-              extract: false,
-            },
-          },
-        ],
       },
       {
         test: /\.jsx?$/,
