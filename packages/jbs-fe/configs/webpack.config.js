@@ -41,6 +41,7 @@ const webpackConfig = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    symlinks: false,
     modules: [
       'node_modules',
       appPaths.resolveNodeModules,
