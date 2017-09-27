@@ -26,6 +26,10 @@ Javascript build scripts. Exposes two packages.
 		}
 	}
 	```
+	
+### Include Stats
+
+To include stats in the build add the env var `INCLUDE_STATS=true`.
 
 
 ### Assumed File Structure

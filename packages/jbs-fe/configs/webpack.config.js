@@ -226,7 +226,7 @@ const webpackConfig = {
         windows: false,
       },
     }),
-    process.env.NODE_ENV === 'production' && new StatsPlugin('stats.json', {
+    process.env.INCLUDE_STATS && new StatsPlugin('stats.json', {
       chunkModules: true,
     }),
     process.env.NODE_ENV === 'production' && new CompressionPlugin({
