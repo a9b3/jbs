@@ -1,9 +1,18 @@
 # jbs-fe (Frontend apps/packages)
 
+Defines a small API for developing frontend javascript.
+
+- `dev`: Active development (webpack-dev)
+- `build`: Build source for web consumption (webpack)
+- `build:package`: Build source for application consumption (babel)
+- `test`: Test `*.spec.js` files (mocha, karma)
+
 ## Setup
 
 1. `yarn add jbs-fe --dev`
-2. Add fields to package.json.
+2. Add fields to `package.json`
+
+	Example `package.json`.
 
 	```json
 	{
@@ -24,7 +33,7 @@
 To include stats in the build add the env var `INCLUDE_STATS=true`.
 
 
-## Assumed File Structure
+## File Structure
 
 You can override the file structure with the following flags supplied to build command.
 
@@ -52,13 +61,15 @@ To change you just need to supply 3 flags.
 --context ./src
 ```
 
-## Developing a React App?
+## React App
 
-To support react, simply add `BABEL_REACT=true` when running any of the commands.
+To support react, simply add `BABEL_REACT=true` when running any of the commands. This will add `babel-preset-react` and `react-hot-loader/babel` to babel configurations. 
 
-## Developing a Frontend Package?
+## Frontend Package
 
-To build a frontend package, use `build:package` command instead of `build`. It takes the same arguments as jbs-node build. (See Below)
+To build a frontend package, use `build:package` command instead of `build`. It takes the same arguments.
+
+Example `package.json`.
 
 ```json
 {
@@ -71,3 +82,6 @@ To build a frontend package, use `build:package` command instead of `build`. It 
 }
 ```
 
+## Todo
+
+- Export karma and webpack configs so consumers can extend them, decouple configs from scripts.
