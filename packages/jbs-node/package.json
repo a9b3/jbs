@@ -1,10 +1,10 @@
 {
   "name": "jbs-node",
-  "version": "0.1.0",
+  "version": "0.1.1-0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "jbs-base-babel": "^0.1.0",
+    "jbs-base-babel": "^0.1.1-0",
     "yargs": "^10.0.3"
   }
 }
