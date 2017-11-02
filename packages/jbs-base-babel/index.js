@@ -4,7 +4,7 @@ module.exports = {
   "presets": [
     require.resolve('babel-preset-stage-0'),
     [require.resolve('babel-preset-es2015'), {
-      modules: ['false', false].indexOf(BABEL_MODULE) > -1 ? false : BABEL_MODULE || 'commonjs',
+      modules: ['false', false].includes(BABEL_MODULE) ? false : BABEL_MODULE || 'commonjs',
     }],
   ],
   "plugins": [

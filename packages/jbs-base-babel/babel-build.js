@@ -1,7 +1,15 @@
-const fs = require('fs')
-const path = require('path')
+const fs       = require('fs')
+const path     = require('path')
 const { exec } = require('child_process')
 
+/**
+ * Executes babel cli with the given input and output.
+ *
+ * @param {string} input
+ * @param {string} output
+ * @param {string} [esInputFile]
+ * @param {string} [esOutputFile]
+ */
 module.exports = function babelBuild({
   input,
   output,
