@@ -63,7 +63,7 @@ To change you just need to supply 3 flags.
 
 ## React App
 
-To support react, simply add `BABEL_REACT=true` when running any of the commands. This will add `babel-preset-react` and `react-hot-loader/babel` to babel configurations. 
+To support react, simply add `BABEL_REACT=true` when running any of the commands. This will add `babel-preset-react` and `react-hot-loader/babel` to babel configurations.
 
 ## Frontend Package
 

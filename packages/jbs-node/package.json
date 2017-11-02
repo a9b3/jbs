@@ -5,6 +5,6 @@
   "license": "MIT",
   "dependencies": {
     "jbs-base-babel": "^0.0.2",
-    "yargs": "^8.0.2"
+    "yargs": "^10.0.3"
   }
 }

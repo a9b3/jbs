@@ -1,9 +1,15 @@
 # jbs-node (Node apps/packages)
 
+Defines a small API for developing node applications.
+
+- `build`: Build source for web consumption (webpack)
+
 ## Setup
 
 1. `yarn add jbs-node --dev`
-2. Add fields to package.json.
+2. Add the following fields to package.json.
+
+  Example `package.json`.
 
 	```json
 	{
@@ -16,7 +22,7 @@
 	}
 	```
 
-## Want to expose module with import/export syntax?
+## Expose module with import/export syntax
 
 You just need to include the two additional flags to the `build` command.
 
