@@ -1,9 +1,10 @@
 # Javascript Build Scripts (JBS)
 
-Abstraction layer for building javascript projects.
+Encapsulate javascript build logic:
 
-- `jbs-fe`
-- `jbs-node`
+- webpack
+- babel
+- tests
 
 
 ## Development
@@ -13,3 +14,13 @@ Install `lerna` globally.
 ```
 npm i -g lerna
 ```
+
+#### Quickstart
+
+Initial setup `lerna bootstrap`
+
+Interactive publish wizard `lerna publish`
+
+## Links
+
+- [lerna docs](https://github.com/lerna/lerna)
