@@ -1,6 +1,6 @@
 {
   "name": "jbs-fe",
-  "version": "0.0.42",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -18,7 +18,7 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.4.2",
-    "jbs-base-babel": "^0.0.2",
+    "jbs-base-babel": "^0.1.0",
     "json-loader": "^0.5.7",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.1.1",
