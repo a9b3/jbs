@@ -110,7 +110,7 @@ const webpackConfig = {
               },
             },
           },
-        ].filter(a => a),
+        ].filter(Boolean),
       },
       {
         test: /\.jsx?$/,
