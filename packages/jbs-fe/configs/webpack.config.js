@@ -282,7 +282,7 @@ function genStyleLoaders({ css =  false } = {}) {
           cssLoader,
           postCssLoader,
           css ? undefined : sassLoader,
-        ].filter(a => a),
+        ].filter(Boolean),
       })
     :
       [
@@ -290,7 +290,7 @@ function genStyleLoaders({ css =  false } = {}) {
         cssLoader,
         postCssLoader,
         css ? undefined : sassLoader,
-      ].filter(a => a)
+      ].filter(Boolean)
 }
 
 if (process.env.APP_ENV === 'test') {
