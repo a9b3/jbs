@@ -4,20 +4,18 @@ const appPaths = require('../app-paths.js')
 const path = require('path')
 
 module.exports = function getKarmaConf(config) {
-  const patternPath = path.resolve(appPaths.projectRoot) + '/!(node_modules|build|lib)/**/*.spec.js?(x)'
+  const patternPath =
+    path.resolve(appPaths.projectRoot) +
+    '/!(node_modules|build|lib)/**/*.spec.js?(x)'
 
   return {
     // default is 9876
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    browsers: [
-      'Chrome',
-    ],
+    browsers: ['Chrome'],
     singleRun: false,
-    frameworks: [
-      'mocha',
-    ],
+    frameworks: ['mocha'],
     files: [
       {
         pattern: patternPath,
@@ -28,21 +26,15 @@ module.exports = function getKarmaConf(config) {
       },
     ],
     preprocessors: {
-      [patternPath]: [
-        'webpack',
-        'sourcemap',
-      ],
+      [patternPath]: ['webpack', 'sourcemap'],
     },
-    reporters: [
-      'dots',
-      'mocha',
-    ],
+    reporters: ['dots', 'mocha'],
     webpack: {
       module: webpackConfig.module,
       resolve: webpackConfig.resolve,
       // required by enzyme
       externals: {
-        'cheerio': 'window',
+        cheerio: 'window',
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,

@@ -2,7 +2,7 @@
 const argv = require('yargs').argv
 
 try {
-  switch(argv._[0]) {
+  switch (argv._[0]) {
     case 'build':
       require('./scripts/build.js')({
         commands: argv._,

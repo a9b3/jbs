@@ -1,12 +1,9 @@
 process.env.BABEL_MODULE = false
 
-const webpack  = require('webpack')
+const webpack = require('webpack')
 const wpConfig = require('../configs/webpack.config.js')
 
-module.exports = function build({
-  commands,
-  flags,
-}) {
+module.exports = function build({ commands, flags }) {
   const statsArgs = {
     chunks: false,
     colors: true,

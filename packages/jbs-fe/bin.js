@@ -3,7 +3,7 @@ const argv = require('yargs').argv
 require('dotenv').config()
 
 try {
-  switch(argv._[0]) {
+  switch (argv._[0]) {
     case 'build':
       process.env.NODE_ENV = 'production'
       require('./scripts/build.js')({

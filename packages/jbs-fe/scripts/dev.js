@@ -1,8 +1,8 @@
-const path             = require('path')
-const webpack          = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const appPaths         = require('../app-paths.js')
-const wpConfig         = require('../configs/webpack.config.js')
+const appPaths = require('../app-paths.js')
+const wpConfig = require('../configs/webpack.config.js')
 
 module.exports = function webpackDev() {
   const port = process.env.PORT || 5000
@@ -31,7 +31,7 @@ module.exports = function webpackDev() {
     },
   })
 
-  server.listen(port, (err) => {
+  server.listen(port, err => {
     if (err) {
       return console.error(err)
     }

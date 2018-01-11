@@ -8,24 +8,27 @@
  * appPaths.faviconPath
  */
 
-const path                    = require('path')
-const webpack                 = require('webpack')
-const HtmlWebpackPlugin       = require('html-webpack-plugin')
-const ExtractText             = require('extract-text-webpack-plugin')
-const FaviconsWebpackPlugin   = require('favicons-webpack-plugin')
-const autoprefixer            = require('autoprefixer')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractText = require('extract-text-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const StatsPlugin             = require('stats-webpack-plugin')
-const CompressionPlugin       = require('compression-webpack-plugin')
+const StatsPlugin = require('stats-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
-const appPaths                = require('../app-paths.js')
+const appPaths = require('../app-paths.js')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 process.env.APP_ENV = process.env.APP_ENV || 'development'
 
 const webpackConfig = {
   // https://webpack.js.org/configuration/devtool/
-  devtool: process.env.NODE_ENV !== 'production' ? 'cheap-module-eval-source-map' : false,
+  devtool:
+    process.env.NODE_ENV !== 'production'
+      ? 'cheap-module-eval-source-map'
+      : false,
   entry: {
     // generally just need one entry file, but if you want another tag for
     // something like google analytics script you can add to this array
@@ -34,20 +37,22 @@ const webpackConfig = {
   output: {
     path: appPaths.outputPath,
     publicPath: '/',
-    filename: `[name]${process.env.NODE_ENV === 'production' ? '.[hash]' : ''}.bundled.js`,
+    filename: `[name]${
+      process.env.NODE_ENV === 'production' ? '.[hash]' : ''
+    }.bundled.js`,
     // Point sourcemap entries to original disk location
     // https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L80
-    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
+    devtoolModuleFilenameTemplate: info =>
+      path.resolve(info.absoluteResourcePath),
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     symlinks: false,
-    modules: [
-      'node_modules',
-      appPaths.resolveNodeModules,
-    ]
-    // https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L91
-    .concat((process.env.NODE_PATH || '').split(path.delimiter).filter(Boolean)),
+    modules: ['node_modules', appPaths.resolveNodeModules]
+      // https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.dev.js#L91
+      .concat(
+        (process.env.NODE_PATH || '').split(path.delimiter).filter(Boolean),
+      ),
   },
   module: {
     strictExportPresence: true,
@@ -141,44 +146,50 @@ const webpackConfig = {
   },
   // https://github.com/webpack/docs/wiki/list-of-plugins
   plugins: [
-    process.env.BABEL_REACT && new webpack.ProvidePlugin({
-      '_': 'lodash',
-      'React': 'react',
-      'cssModule': 'react-css-modules',
-      'Promise': 'bluebird',
-    }),
+    process.env.BABEL_REACT &&
+      new webpack.ProvidePlugin({
+        _: 'lodash',
+        React: 'react',
+        cssModule: 'react-css-modules',
+        Promise: 'bluebird',
+      }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
-      'process.env': Object.keys(process.env).reduce((env, key) => {
-        env[key] = JSON.stringify(process.env[key])
-        return env
-      }, {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-      }),
-    }),
-    new HtmlWebpackPlugin(Object.assign(
-      {},
-      // default configs
-      {
-        inject: true,
-        template: appPaths.htmlIndex,
-      },
-      // production configs
-      process.env.NODE_ENV === 'production' && {
-        minify: {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          keepClosingSlash: true,
-          minifyJS: true,
-          minifyCSS: true,
-          minifyURLs: true,
+      'process.env': Object.keys(process.env).reduce(
+        (env, key) => {
+          env[key] = JSON.stringify(process.env[key])
+          return env
         },
-      }
-    )),
+        {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        },
+      ),
+    }),
+    new HtmlWebpackPlugin(
+      Object.assign(
+        {},
+        // default configs
+        {
+          inject: true,
+          template: appPaths.htmlIndex,
+        },
+        // production configs
+        process.env.NODE_ENV === 'production' && {
+          minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          },
+        },
+      ),
+    ),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       children: true,
@@ -191,55 +202,64 @@ const webpackConfig = {
       debug: process.env.NODE_ENV === 'development',
     }),
     process.env.NODE_ENV === 'development' && new webpack.NamedModulesPlugin(),
-    process.env.NODE_ENV === 'development' && new webpack.NoEmitOnErrorsPlugin(),
-    process.env.NODE_ENV === 'production' && new ExtractText({
-      filename: '[name].[hash].bundle.css',
-    }),
-    process.env.NODE_ENV === 'production' && new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 51200,
-    }),
-    process.env.NODE_ENV === 'production' && new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compressor: {
-        warnings: false,
-      },
-    }),
-    process.env.NODE_ENV === 'production' && new SWPrecacheWebpackPlugin({
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      minify: true,
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-    }),
+    process.env.NODE_ENV === 'development' &&
+      new webpack.NoEmitOnErrorsPlugin(),
+    process.env.NODE_ENV === 'production' &&
+      new ExtractText({
+        filename: '[name].[hash].bundle.css',
+      }),
+    process.env.NODE_ENV === 'production' &&
+      new webpack.optimize.MinChunkSizePlugin({
+        minChunkSize: 51200,
+      }),
+    process.env.NODE_ENV === 'production' &&
+      new webpack.optimize.UglifyJsPlugin({
+        mangle: true,
+        compressor: {
+          warnings: false,
+        },
+      }),
+    process.env.NODE_ENV === 'production' &&
+      new SWPrecacheWebpackPlugin({
+        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        filename: 'service-worker.js',
+        minify: true,
+        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      }),
     // https://github.com/jantimon/favicons-webpack-plugin
-    process.env.NODE_ENV === 'production' && appPaths.faviconPath && new FaviconsWebpackPlugin({
-      logo: appPaths.faviconPath,
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
-      },
-    }),
-    process.env.INCLUDE_STATS && new StatsPlugin('stats.json', {
-      chunkModules: true,
-    }),
-    process.env.NODE_ENV === 'production' && new CompressionPlugin({
-      asset: '[path].gz',
-      algorithm: 'gzip',
-      test: /\.(js|css|html)$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+    process.env.NODE_ENV === 'production' &&
+      appPaths.faviconPath &&
+      new FaviconsWebpackPlugin({
+        logo: appPaths.faviconPath,
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          coast: false,
+          favicons: true,
+          firefox: true,
+          opengraph: false,
+          twitter: false,
+          yandex: false,
+          windows: false,
+        },
+      }),
+    process.env.INCLUDE_STATS &&
+      new StatsPlugin('stats.json', {
+        chunkModules: true,
+      }),
+    process.env.NODE_ENV === 'production' &&
+      new CompressionPlugin({
+        asset: '[path].gz',
+        algorithm: 'gzip',
+        test: /\.(js|css|html)$/,
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
   ].filter(Boolean),
 }
 
-function genStyleLoaders({ css =  false } = {}) {
+function genStyleLoaders({ css = false } = {}) {
   const isProd = process.env.NODE_ENV === 'production'
   const sourceMap = !isProd
   const styleLoader = {
@@ -253,7 +273,9 @@ function genStyleLoaders({ css =  false } = {}) {
     options: {
       modules: true,
       importLoaders: '1',
-      localIdentName: `[path]___[name]__[local]${isProd ? '___[hash:base64:5]' : '' }`,
+      localIdentName: `[path]___[name]__[local]${
+        isProd ? '___[hash:base64:5]' : ''
+      }`,
       sourceMap,
     },
   }
@@ -261,9 +283,7 @@ function genStyleLoaders({ css =  false } = {}) {
     loader: require.resolve('postcss-loader'),
     options: {
       ident: 'postcss',
-      plugin: () => [
-        autoprefixer(),
-      ],
+      plugin: () => [autoprefixer()],
       sourceMap,
     },
   }
@@ -275,17 +295,13 @@ function genStyleLoaders({ css =  false } = {}) {
   }
 
   return process.env.NODE_ENV === 'production'
-    ?
-      ExtractText.extract({
+    ? ExtractText.extract({
         fallback: require.resolve('style-loader'),
-        use: [
-          cssLoader,
-          postCssLoader,
-          css ? undefined : sassLoader,
-        ].filter(Boolean),
+        use: [cssLoader, postCssLoader, css ? undefined : sassLoader].filter(
+          Boolean,
+        ),
       })
-    :
-      [
+    : [
         styleLoader,
         cssLoader,
         postCssLoader,

@@ -4,7 +4,7 @@ module.exports = function(config) {
   const karmaConf = getKarmaConf(config)
 
   karmaConf.webpack.externals = Object.assign({}, karmaConf.webpack.externals, {
-    'cheerio': 'window',
+    cheerio: 'window',
     'react/addons': true,
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true,
