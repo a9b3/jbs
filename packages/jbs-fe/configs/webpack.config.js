@@ -264,15 +264,13 @@ function genStyleLoaders({ css = false } = {}) {
   const sourceMap = !isProd
   const styleLoader = {
     loader: require.resolve('style-loader'),
-    options: {
-      sourceMap,
-    },
+    options: { sourceMap },
   }
   const cssLoader = {
     loader: require.resolve('css-loader'),
     options: {
       modules: true,
-      importLoaders: '1',
+      importLoaders: 1,
       localIdentName: `[path]___[name]__[local]${
         isProd ? '___[hash:base64:5]' : ''
       }`,
@@ -289,9 +287,7 @@ function genStyleLoaders({ css = false } = {}) {
   }
   const sassLoader = {
     loader: require.resolve('sass-loader'),
-    options: {
-      sourceMap,
-    },
+    options: { sourceMap },
   }
 
   return process.env.NODE_ENV === 'production'
