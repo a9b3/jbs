@@ -6,14 +6,15 @@ const path = require('path')
 module.exports = function getKarmaConf(config) {
   const patternPath =
     path.resolve(appPaths.projectRoot) +
-    '/!(node_modules|build|lib)/**/*.spec.js?(x)'
+    `/!(node_modules|build|lib)/**/${process.env.FILE || '*'}.spec.js?(x)`
 
   return {
     // default is 9876
     port: 9876,
     colors: true,
+    concurrency: Infinity,
     logLevel: config.LOG_INFO,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
     frameworks: ['mocha'],
     files: [
