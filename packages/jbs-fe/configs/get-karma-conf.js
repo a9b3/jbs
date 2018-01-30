@@ -29,7 +29,7 @@ module.exports = function getKarmaConf(config) {
     preprocessors: {
       [patternPath]: ['webpack', 'sourcemap'],
     },
-    reporters: ['dots', 'mocha'],
+    reporters: ['mocha'],
     webpack: {
       module: webpackConfig.module,
       resolve: webpackConfig.resolve,
