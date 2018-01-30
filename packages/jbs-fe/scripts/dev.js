@@ -23,12 +23,8 @@ module.exports = function webpackDev() {
     inline: true,
     historyApiFallback: true,
     clientLogLevel: 'none',
-    stats: {
-      colors: true,
-    },
-    watchOptions: {
-      ignored: /node_modules/,
-    },
+    stats: { colors: true },
+    watchOptions: { ignored: /node_modules/ },
   })
 
   server.listen(port, err => {
